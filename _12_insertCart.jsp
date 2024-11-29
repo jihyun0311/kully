@@ -62,9 +62,10 @@
 
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				conn = DriverManager.getConnection(jdbcUrl, dbId, dbPw);
-				String s = " select cart_count from cart where cart_itemName=? ";
+				String s = " select cart_count from cart where cart_itemName=? and mem_cartId=?";
 				pstmt = conn.prepareStatement(s);
 				pstmt.setString(1, item[1]);
+				pstmt.setString(2, logid);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
 					int co = rs.getInt(1);
